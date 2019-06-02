@@ -1,12 +1,6 @@
 var speed;
 
 function onLoad() {
-	SpeechRecognition.isRecognitionAvailable()
-		.then((available) => console.log(available));
-	if (!speechRecognition.hasPermission()) {
-		speechRecognition.requestPermission();
-	}
-
 	window.addEventListener("push", function () {
 		if (speed) document.getElementById("numberTxt").value = speed;
 		Scan();
@@ -145,6 +139,12 @@ function VoiceControl() {
 		prompt: "Start voice",
 		showPopup: true,
 		showPartial: true
+	}
+
+	SpeechRecognition.isRecognitionAvailable()
+		.then((available) => console.log(available));
+	if (!speechRecognition.hasPermission()) {
+		speechRecognition.requestPermission();
 	}
 
 	speechRecognition.startListening(
