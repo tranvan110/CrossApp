@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bluetooth Setting</title>
+</head>
+
+<body>
+    <!-- Make sure all your bars are the first things in your <body> -->
+    <header class="bar bar-nav">
+        <a class="icon icon-left-nav pull-left" href="index.html" data-transition="slide-out"></a>
+        <a class="icon icon-compose pull-right"></a>
+        <h1 class="title">Bluetooth Setting</h1>
+    </header>
+    <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+    <div class="content">
+        <div class="content-padded">
+            <button class="btn btn-positive btn-block" onclick="Scan()">Scan</button>
+            <button id="ble-close" class="btn btn-positive btn-block" disabled onclick="Disconnect()">Disconnect</button>
+            <div class="row">
+                <div class="col" style="width: 70%;"><input id="messageTxt" type="text" placeholder="Type message to send"></div>
+                <div class="col"><button id="ble-send" class="btn btn-positive btn-block" onclick="Send()">Send</button></div>
+            </div>
+            <div class="row">
+                <div class="col" style="width: 70%;"><input id="numberTxt" type="text" placeholder="Enter speed"></div>
+                <div class="col"><button class="btn btn-positive btn-block" onclick="SpeedSet()">Set</button></div>
+            </div>
+            <ul id="devices" class="table-view"></ul>
+            <p id="status" class="content-padded">Status</p>
+        </div>
+    </div>
+</body>
+
+</html>
