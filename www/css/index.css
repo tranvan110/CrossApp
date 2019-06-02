@@ -1,0 +1,20 @@
+@media (min-width: 100px) {
+	.row {
+		width: 100%;
+		display: table;
+		table-layout: fixed;
+	}
+
+	.col {
+		display: table-cell;
+		text-align: center;
+	}
+}
+
+body {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
