@@ -45,6 +45,8 @@ function onLoad() {
 
 	document.addEventListener("touchstart", function (event) {
 		var tag = event.target;
+		console.log(tag);
+		tag.querySelector("circle").getAttributeNode("fill").value = "red";
 		if (tag.id == "M") {
 			VoiceControl();
 		}
@@ -54,6 +56,7 @@ function onLoad() {
 
 	document.addEventListener("touchend", function (event) {
 		var tag = event.target;
+		tag.querySelector("circle").getAttributeNode("fill").value = "none";
 		if (tag.id == "M") {
 			SpeechRecognition.stopListening();
 		}
