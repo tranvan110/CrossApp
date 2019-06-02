@@ -3,6 +3,9 @@ var speed;
 function onLoad() {
 	SpeechRecognition.isRecognitionAvailable()
 		.then((available) => console.log(available));
+	if (!speechRecognition.hasPermission()) {
+		speechRecognition.requestPermission();
+	}
 
 	window.addEventListener("push", function () {
 		if (speed) document.getElementById("numberTxt").value = speed;
@@ -42,18 +45,25 @@ function onLoad() {
 
 	document.addEventListener("touchstart", function (event) {
 		var tag = event.target;
-		if (tag.tagName == "svg")
+		if (tag.id == "M") {
+			VoiceControl();
+		}
+		else if (tag.tagName == "svg")
 			bluetoothSerial.write(tag.id + speed + "\n");
 	});
 
 	document.addEventListener("touchend", function (event) {
 		var tag = event.target;
-		if (tag.tagName == "svg")
+		if (tag.id == "M") {
+			SpeechRecognition.stopListening();
+		}
+		else if (tag.tagName == "svg")
 			bluetoothSerial.write(tag.id + "0\n");
 	});
 }
 
 var errorHandle = function (error) {
+	var status = document.querySelector("#status");
 	status.innerHTML = "Error: " + JSON.stringify(error);
 }
 
@@ -121,4 +131,25 @@ function Send() {
 
 function SpeedSet() {
 	speed = document.getElementById("numberTxt").value;
+}
+
+function VoiceControl() {
+	var status = document.querySelector("#status");
+
+	let options = {
+		"language": "vi-VN",
+		matches: 2,
+		prompt: "Start voice",
+		showPopup: true,
+		showPartial: true
+	}
+
+	speechRecognition.startListening(
+		function (result) {
+			console.log(result);
+			status.innerHTML = result;
+		}, function (err) {
+			console.error(err);
+			status.innerHTML = err;
+		}, options)
 }
